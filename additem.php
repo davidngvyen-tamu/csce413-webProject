@@ -1,11 +1,16 @@
 <?php
-
+session_start();
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: index.html");
+    exit();
+}
+mysqli_report(MYSQLI_REPORT_OFF);
 $item_name = "";
 $item_price = "";
 
-$db = mysqli_connect('localhost', 'root', '', 'inventorymanagement');
+$db = mysqli_connect('localhost', 'root', 'hellodavid', 'inventorymanagement');
 if (mysqli_connect_errno()) {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  die("Connection failed. Please try again later.");
 }
 
 if (isset($_POST['add'])) {

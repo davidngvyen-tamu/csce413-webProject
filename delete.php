@@ -1,7 +1,13 @@
 <?php
-$db = mysqli_connect('localhost', 'root', '', 'inventorymanagement');
+session_start();
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: index.html");
+    exit();
+}
+mysqli_report(MYSQLI_REPORT_OFF);
+$db = mysqli_connect('localhost', 'root', 'hellodavid', 'inventorymanagement');
 if (mysqli_connect_errno()) {
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    die("Connection failed. Please try again later.");
 }
 ?>
 <?php

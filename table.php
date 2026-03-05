@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: index.html");
+    exit();
+}
+?>
 <!doctype html>
 <html>
 <head>
@@ -50,7 +57,8 @@
                 </thead>
                 <tbody>
                     <?php
-                    $conn = new mysqli("localhost", "root", "", "inventorymanagement");
+                    mysqli_report(MYSQLI_REPORT_OFF);
+                    $conn = new mysqli("localhost", "root", "hellodavid", "inventorymanagement");
                     $sql = "SELECT * FROM product";
                     $result = $conn->query($sql);
                     $count = 0;

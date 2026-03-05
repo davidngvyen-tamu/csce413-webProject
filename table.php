@@ -57,8 +57,9 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                 </thead>
                 <tbody>
                     <?php
+                    require_once(__DIR__ . '/env_loader.php');
                     mysqli_report(MYSQLI_REPORT_OFF);
-                    $conn = new mysqli("localhost", "root", "hellodavid", "inventorymanagement");
+                    $conn = new mysqli(getenv('DB_HOST'), getenv('DB_USER'), getenv('DB_PASSWORD'), getenv('DB_NAME'));
                     $sql = "SELECT * FROM product";
                     $result = $conn->query($sql);
                     $count = 0;

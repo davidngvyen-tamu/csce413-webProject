@@ -2,7 +2,7 @@
 session_start();
 mysqli_report(MYSQLI_REPORT_OFF);
 
-$con = mysqli_connect('localhost', 'root', '', 'inventorymanagement');
+$con = mysqli_connect('db', 'root', 'root', 'inventorymanagement');
 if (mysqli_connect_errno()) {
     die("Connection failed. Please try again later.");
 }
@@ -10,8 +10,10 @@ if (mysqli_connect_errno()) {
 $email = $_POST['email'];
 $user_password = $_POST['password'];
 
-$sql = "select * from user where email = '$email'";
-$result = mysqli_query($con, $sql);
+$stmt = mysqli_prepare($con, "SELECT * FROM user WHERE email = ?");
+mysqli_stmt_bind_param($stmt, "s", $email);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 $count = mysqli_num_rows($result);
 

@@ -8,7 +8,7 @@ mysqli_report(MYSQLI_REPORT_OFF);
 $item_name = "";
 $item_price = "";
 
-$db = mysqli_connect('localhost', 'root', '', 'inventorymanagement');
+$db = mysqli_connect('db', 'root', 'root', 'inventorymanagement');
 if (mysqli_connect_errno()) {
   die("Connection failed. Please try again later.");
 }

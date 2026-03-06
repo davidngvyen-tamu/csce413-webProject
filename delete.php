@@ -5,7 +5,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     exit();
 }
 mysqli_report(MYSQLI_REPORT_OFF);
-$db = mysqli_connect('localhost', 'root', '', 'inventorymanagement');
+$db = mysqli_connect('db', 'root', 'root', 'inventorymanagement');
 if (mysqli_connect_errno()) {
     die("Connection failed. Please try again later.");
 }

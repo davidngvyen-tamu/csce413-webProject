@@ -1,9 +1,8 @@
 <?php
 session_start();
-require_once(__DIR__ . '/env_loader.php');
 mysqli_report(MYSQLI_REPORT_OFF);
 
-$con = mysqli_connect(getenv('DB_HOST'), getenv('DB_USER'), getenv('DB_PASSWORD'), getenv('DB_NAME'));
+$con = mysqli_connect('localhost', 'root', '', 'inventorymanagement');
 if (mysqli_connect_errno()) {
     die("Connection failed. Please try again later.");
 }

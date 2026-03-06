@@ -12,12 +12,13 @@ if (mysqli_connect_errno()) {
 ?>
 <?php
 
-if (isset($_GET['id'])) {
-
-    $result = mysqli_query($db, "DELETE FROM product WHERE product_id=" . $_GET['id']);
-    if ($result == true)
-        echo "sucess";
-    header("Location:table.php");
+if (isset($_GET['id']) && is_numeric($_GET['id']) && (int)$_GET['id'] > 0) {
+    $id = (int)$_GET['id'];
+    $stmt = mysqli_prepare($db, "DELETE FROM product WHERE product_id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
 }
+header("Location: table.php");
+exit();
 
 ?>

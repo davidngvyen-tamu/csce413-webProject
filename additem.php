@@ -15,13 +15,13 @@ if (mysqli_connect_errno()) {
 
 if (isset($_POST['add'])) {
   echo "connect";
-  $item_name = mysqli_real_escape_string($db, $_POST['product_name']);
-  $item_price = mysqli_real_escape_string($db, $_POST['price']);
-  $quant = mysqli_real_escape_string($db, $_POST['quant']);
+  $item_name = $_POST['product_name'];
+  $item_price = $_POST['price'];
+  $quant = $_POST['quant'];
 
-  $query = "INSERT INTO product (product_name,price,quantity) 
-  			  VALUES('$item_name','$item_price','$quant')";
-  if (mysqli_query($db, $query)) {
+  $stmt = mysqli_prepare($db, "INSERT INTO product (product_name,price,quantity) VALUES(?,?,?)");
+  mysqli_stmt_bind_param($stmt, "sss", $item_name, $item_price, $quant);
+  if (mysqli_stmt_execute($stmt)) {
     echo "<script>alert('Successfully stored');</script>";
 
   } else {

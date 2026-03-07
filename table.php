@@ -72,13 +72,13 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                             <?php echo $count ?>
                         </th>
                         <th>
-                            <?php echo $row["product_name"] ?>
+                            <?php echo htmlspecialchars($row["product_name"], ENT_QUOTES, 'UTF-8') ?>
                         </th>
                         <th>
-                            <?php echo $row["price"] ?>
+                            <?php echo htmlspecialchars($row["price"], ENT_QUOTES, 'UTF-8') ?>
                         </th>
                         <th>
-                            <?php echo $row["quantity"] ?>
+                            <?php echo htmlspecialchars($row["quantity"], ENT_QUOTES, 'UTF-8') ?>
                         </th>
                         <th> 
                             <a href="up" Edit</a><a href="edit.php?id=<?php echo $row["product_id"] ?>">Edit</a>
